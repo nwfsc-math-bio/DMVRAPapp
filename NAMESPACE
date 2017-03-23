@@ -4,4 +4,8 @@ export(
 DM
 )
 
+## Imports
+import(stringr)
+importFrom(shiny, runApp)
+importFrom("utils", "packageVersion", "packageDescription")
 

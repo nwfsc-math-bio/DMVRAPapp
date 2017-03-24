@@ -59,12 +59,17 @@ fluidPage(
                        "mean:", 
                        value = 0,
                        min = -5, 
-                       max = 0, step=.1),
+                       max = 5, step=1),
            sliderInput("flowSig", 
                        "standard deviation:", 
                        value = 10,
                        min = 0, 
-                       max = 20, step=.1)
+                       max = 20, step=.1),
+           sliderInput("flowRange", 
+                       "min & max:", 
+                       value = c(-1000,-.0001),
+                       min = -1000, 
+                       max = -.0001)
     )
     
     ),

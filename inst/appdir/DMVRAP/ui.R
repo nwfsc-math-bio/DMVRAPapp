@@ -1,6 +1,6 @@
-#.libPaths(c("/usr/lib64/R/shiny_library",.libPaths()))
+.libPaths(c("/usr/lib64/R/shiny_library",.libPaths()))
 library("appFrame")
-
+library("DMVRAPapp")
 source("version.R")
 
 appTitle <- paste0("<span title='Shiny app version / DM version /",
@@ -135,7 +135,7 @@ shinyUI(
               selectInput("covariates",
                           "Include Marine Survival and Stream Flow covariates?",
                           list("No" = "no", 
-                               "Yes" = "yes")), 
+                               "Yes" = "yes")),
               selectInput("analysisType", "Analysis Type:",
                           list("DM" = "DM", 
                                "SS" = "SS")))
@@ -156,6 +156,8 @@ shinyUI(
                        source("inputpriors.R")),
               tabPanel("Help", includeHTML("html/dmmain_help.html"),
                        value="dmmainhelp"),
+              tabPanel("Input versions",
+                       includeHTML("html/input_version_help.html")),
               selected="dmmainhelp"
             )
           )
@@ -207,7 +209,8 @@ shinyUI(
                        uiOutput("VRAPesc")),
               tabPanel("Downloads", uiOutput("vrapdownloadtab")),
               tabPanel("Help",
-                       includeHTML("html/vrapmain_help.html"))
+                       includeHTML("html/vrapmain_help.html")),
+              selected="Help"
             )
           )
         )

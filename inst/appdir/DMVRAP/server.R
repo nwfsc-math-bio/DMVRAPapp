@@ -77,7 +77,7 @@ SCANCMD <- "clamdscan --fdpass --remove"
 ## Workaround for skipEmptyCols bug in openxlsx 4.0.0
 
 readXLSX <- function(xlsxfile, nominalcols, emptycol=30, sheet="DynamicsInput") {
-  df <- read.xlsx(xlsxfile, sheet=sheet, colNames=FALSE, skipEmptyCols=FALSE)
+  df <- read.xlsx(xlsxfile, sheet=sheet, colNames=FALSE)
   if (ncol(df) > emptycol) {
     if (ncol(df) < nominalcols) {
       df <- cbind(df[1:emptycol-1],rep(0,nrow(df)),df[emptycol:ncol(df)])

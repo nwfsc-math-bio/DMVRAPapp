@@ -1305,26 +1305,6 @@ shinyServer( function(input, output, session) {
             flowMu=input$flowMu, flowSig=input$flowSig, flowMin=input$flowRange[1], flowMax=input$flowRange[2])
             
 
-          # logMu <- log(input$pMode) + input$pSig^2
-          # pTau <- 1/(input$pSig^2)
-          # cTau <- 1/(input$cSig^2)
-          # msTau <- 1/(input$msSig^2)
-          # flowTau <- 1/(input$flowSig^2)
-          # inputPriors <- list(
-          #   prodPrior = c(logMu=logMu, tau=pTau,
-          #                 lowerBound=input$pRange[1],
-          #                 upperBound=input$pRange[2]),
-          #   logCapPrior = c(mu=input$cMu, tau=cTau,
-          #                   lowerBound=input$cRange[1],
-          #                   upperBound=input$cRange[2]),
-          #   msCoefPrior = c(mu=input$msMu, tau=msTau,
-          #                   lowerBound=input$msRange[1],
-          #                   upperBound=input$msRange[2]),
-          #   flowCoefPrior = c(mu=input$flowMu, tau=flowTau,
-          #                     lowerBound=input$flowRange[1],
-          #                     upperBound=input$flowRange[2])
-          # )
-
           ## run BUGS and get the posteriors
           gperror <-
             try({

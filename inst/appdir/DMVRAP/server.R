@@ -1273,7 +1273,7 @@ shinyServer( function(input, output, session) {
           } else if (input$type == "Demo") {
             ## temporary package name change
             a.and.p.file <-
-              file.path(path.package("DM"),"doc","DemoAandP2.csv")
+              file.path(path.package("DM"),"doc","DemoAandP-Stilliguamish.csv")
           }
           if (ONSERVER) options(warn=-1)
           readInput <- list(SRfunction=inputdata()[1],
@@ -1297,23 +1297,33 @@ shinyServer( function(input, output, session) {
           
           ## Get the priors list from the priors tab
           ## This is the priors arg for new createBUGSdata()
+          
+          inputPriors = createPriors(
+            pMode=input$pMode, pSig=input$pSig, pMin=input$pRange[1], pMax=input$pRange[2],
+            cMu=input$cMu, cSig=input$cSig, cMin=input$cRange[1], cMax=input$cRange[2],
+            msMu=input$msMu, msSig=input$msSig, msMin=input$msRange[1], msMax=input$msRange[2],
+            flowMu=input$flowMu, flowSig=input$flowSig, flowMin=input$flowRange[1], flowMax=input$flowRange[2])
+            
 
-          logMu <- log(input$pMode) + input$pSig^2
-          pTau <- 1/(input$pSig^2)
-          cTau <- 1/(input$cSig^2)
-          msTau <- 1/(input$msSig^2)
-          flowTau <- 1/(input$flowSig^2)
-          inputPriors <- list(
-            prodPrior = c(logMu=logMu,tau=pTau,lowerBound=input$pRange[1],
-                          upperBound=input$pRange[2]),
-            logCapPrior = c(mu=input$cMu,tau=cTau,lowerBound=input$cRange[1],
-                            upperBound=input$cRange[2]),
-            msCoefPrior = c(mu=input$msMu,tau=msTau,lowerBound=0),
-            flowCoefPrior = c(mu=input$flowMu,tau=flowTau,
-                              lowerBound=input$flowRange[1],
-                              upperBound=input$flowRange[2]),
-            tauPrior = c(gamma1=1e-4,gamma2=1e-4)
-          )
+          # logMu <- log(input$pMode) + input$pSig^2
+          # pTau <- 1/(input$pSig^2)
+          # cTau <- 1/(input$cSig^2)
+          # msTau <- 1/(input$msSig^2)
+          # flowTau <- 1/(input$flowSig^2)
+          # inputPriors <- list(
+          #   prodPrior = c(logMu=logMu, tau=pTau,
+          #                 lowerBound=input$pRange[1],
+          #                 upperBound=input$pRange[2]),
+          #   logCapPrior = c(mu=input$cMu, tau=cTau,
+          #                   lowerBound=input$cRange[1],
+          #                   upperBound=input$cRange[2]),
+          #   msCoefPrior = c(mu=input$msMu, tau=msTau,
+          #                   lowerBound=input$msRange[1],
+          #                   upperBound=input$msRange[2]),
+          #   flowCoefPrior = c(mu=input$flowMu, tau=flowTau,
+          #                     lowerBound=input$flowRange[1],
+          #                     upperBound=input$flowRange[2])
+          # )
 
           ## run BUGS and get the posteriors
           gperror <-
@@ -1577,22 +1587,16 @@ shinyServer( function(input, output, session) {
     plot(x, dnorm(x,mean=input$cMu,sd=input$cSig)*ix, 
          main='Log Capacity Prior',xlab='Log Capacity',ylab='Density',type='l',bty='n')
     
-    # x <- seq(1e-5,1e-2,1e-5)
-    # plot(x, dgamma(x,10^input$tauShape,10^input$tauRate), 
-    #      main='tau Prior',xlab='tau',ylab='Density',type='l',bty='n')
-    
-    ## x <- seq(0,101,.01)
-    ## ix <- rep(1, length(x)); ix[x>input$msRange[2]]=0; ix[x<input$msRange[1]]=0
-    x <- seq(-20,20,0.01)
-    ix <- rep(1, length(x)); ix[x<0]=0
+    x <- seq(-100,100,0.001)
+    ix <- rep(1, length(x)); ix[x>input$msRange[2]]=0; ix[x<input$msRange[1]]=0
     plot(x,dnorm(x,mean=input$msMu,sd=input$msSig)*ix,
          main='marine survival coef Prior',xlab='ms coef',ylab='Density',type='l',bty='n')
 
     ## x <- seq(0,5001,.01)
-    x <- seq(-100, -.0001)
+    x <- seq(-100,100, 0.001)
     ix <- rep(1, length(x)); ix[x>input$flowRange[2]]=0; ix[x<input$flowRange[1]]=0
     plot(x,dnorm(x,mean=input$flowMu,sd=input$flowSig)*ix,
-         main='flow coef Prior',xlab='flow coef',ylab='Density',type='l',bty='n')
+         main='freshwater survival coef Prior',xlab='fshwater coef',ylab='Density',type='l',bty='n')
   }, height = 400, width = 600 )
   
 })

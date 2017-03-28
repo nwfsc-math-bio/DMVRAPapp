@@ -12,13 +12,13 @@ vrapVersion <- packageVersion("VRAP")
 dmVersion <- packageVersion("DM")
 
 if (!is.null(dmVersion) && length(dmVersion) > 0) {
-  appTitle <- paste0(appTitle, " / ", dmVersion)
+  appTitle <- paste0(appTitle, " / ", dmVersion, " DM")
 } else {
   appTitle <- paste0(appTitle, " / ")
 }
 
 if (!is.null(vrapVersion) && length(vrapVersion) > 0) {
-  appTitle <- paste0(appTitle, " / ", vrapVersion)
+  appTitle <- paste0(appTitle, " / ", vrapVersion, " VRAP")
 }
 
 appTitle <- paste0(appTitle, "</span>")

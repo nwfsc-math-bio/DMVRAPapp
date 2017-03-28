@@ -30,7 +30,7 @@ fluidPage(
                   max = 20,step=.001),
       sliderInput("cSig", 
                   "standard deviation:", 
-                  value = 50,
+                  value = 10,
                   min = 1, 
                   max = 200, step=.001),
       sliderInput("cRange", 
@@ -40,26 +40,31 @@ fluidPage(
                   max = 20)
     ),
     column(3,
-           h4("marine surv"),
+           h4("Marine Surv Coef"),
            sliderInput("msMu", 
                        "mean:", 
                        value = 0,
-                       min = -5, 
+                       min = 0, 
                        max = 5, step=1),
            sliderInput("msSig", 
-                       "stadard deviation:", 
+                       "standard deviation:", 
                        value = 10,
                        min = 0, 
-                       max = 20, step=.1)
-  
+                       max = 20, step=.1),
+           sliderInput("msRange", 
+                       "min & max:", 
+                       value = c(0,100),
+                       min = 0, 
+                       max = 100)
+           
     ),
     column(3,
-           h4("flow"),
+           h4("Freshwater Surv Coef"),
            sliderInput("flowMu", 
                        "mean:", 
                        value = 0,
                        min = -5, 
-                       max = 5, step=1),
+                       max = 0, step=1),
            sliderInput("flowSig", 
                        "standard deviation:", 
                        value = 10,
@@ -67,9 +72,9 @@ fluidPage(
                        max = 20, step=.1),
            sliderInput("flowRange", 
                        "min & max:", 
-                       value = c(-1000,-.0001),
-                       min = -1000, 
-                       max = -.0001)
+                       value = c(-100,0),
+                       min = -100, 
+                       max = 0)
     )
     
     ),

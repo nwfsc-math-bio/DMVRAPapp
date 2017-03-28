@@ -1303,7 +1303,6 @@ shinyServer( function(input, output, session) {
             cMu=input$cMu, cSig=input$cSig, cMin=input$cRange[1], cMax=input$cRange[2],
             msMu=input$msMu, msSig=input$msSig, msMin=input$msRange[1], msMax=input$msRange[2],
             flowMu=input$flowMu, flowSig=input$flowSig, flowMin=input$flowRange[1], flowMax=input$flowRange[2])
-            
 
           ## run BUGS and get the posteriors
           gperror <-
@@ -1362,9 +1361,10 @@ shinyServer( function(input, output, session) {
           renderUI(list(HTML(fig.cap2),includeHTML("html/captionfooter.html")))
 
         rendererror <- 
-          try(
-            Report1(dmObj.RData.file=filename, output.file=basename(outfilename),
-                    rav.options=list(numRuns=DMNUMRUNS)),
+        try(
+            writeReport(dmObj.RData.file=filename, output.file=basename(outfilename),
+                    rav.options=list(numRuns=DMNUMRUNS),
+                    output.format="pdf_document", input.type="xRnw"),
             silent=TRUE)
 
         createRAVerror <- try(
@@ -1396,7 +1396,7 @@ shinyServer( function(input, output, session) {
         modpath <- file.path(getOutputDir(), "mod1.txt")
         if(file.exists(modpath)) file.remove(modpath)
 
-        modpath <- file.path(getOutputDir(), "Report1-knitr.Rmd")
+        modpath <- file.path(getOutputDir(), "Report1-knitr.xRnw")
         if(file.exists(modpath)) file.remove(modpath)
 
         if(file.exists("Rplots.pdf")) file.remove("Rplots.pdf")

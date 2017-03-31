@@ -4,7 +4,7 @@ require(shiny) # 0.14.2
 require(openxlsx)
 require(VRAP)
 
-options(shiny.maxRequestSize=20*1024^2)
+options(shiny.maxRequestSize=40*1024^2)
 
 if (file.exists("parcores.R")) {
   source("parcores.R")

@@ -730,9 +730,7 @@ shinyServer( function(input, output, session) {
     if (vrapOutputAvailable()) {
       vrapBase <- getVRAPBaseName()
       return(HTML(
-        htmlize(paste0(getoutputfile("html/byr_colheaders.txt"),
-                       getoutputfile(vrapOutputPath(".byr"))),
-                "byrtabtext",2)))
+        htmlize(getoutputfile(vrapOutputPath(".byr")), "byrtabtext",2)))
     } else {
       return(includeHTML("html/vrapbyr_help.html"))
     }
@@ -745,9 +743,7 @@ shinyServer( function(input, output, session) {
     if (vrapOutputAvailable()) {
       vrapBase <- getVRAPBaseName()
       return(HTML(
-        htmlize(paste0(getoutputfile("html/esc_colheaders.txt"),
-                       getoutputfile(vrapOutputPath(".esc"))),
-                "esctabtext",2)))
+        htmlize(getoutputfile(vrapOutputPath(".esc")), "esctabtext",2)))
     } else {
       return(includeHTML("html/vrapesc_help.html"))
     }

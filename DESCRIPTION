@@ -1,8 +1,8 @@
 Package: DMVRAPapp
 Type: Package
 Title: Dynamic Model + VRAP
-Version: 1.1.10
-Date: 2017-03-23
+Version: 1.1.11
+Date: 2017-04-04
 Depends: R (>= 2.15.0), DM (>= 1.7.2), VRAP (>= 1.3.6), shiny (>= 0.14.2), openxlsx, stringr, utils
 Author: Howard Coleman and Eli Holmes, NOAA, Seattle, USA
 Maintainer: Elizabeth Holmes - NOAA Federal <eli.holmes@noaa.gov>
